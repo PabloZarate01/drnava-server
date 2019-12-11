@@ -1,14 +1,19 @@
 const morgan = require('morgan');
-const nodemon = require('nodemon');
-
+const { mongoose } = require('./database')
 const express = require('express');
-const app = express;
+const app = express();
+//Import routes
 
-
-app.listen(1334, (req,res) => {
-    console.log("SERVER ON PORT 1334");
-} )
+//Middleware
+app.use(morgan('dev'));
+//Settings
+app.set('port', process.env.PORT || 8080)
+//Server
+app.listen(app.get('port'), () => {
+    console.log('SERVER ON PORT', app.get('port'));
+});
 app.get('/', (req, res) =>{
     res.send('Server ON!');
 });
+//Routes
 
