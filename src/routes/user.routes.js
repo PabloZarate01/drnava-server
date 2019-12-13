@@ -15,9 +15,9 @@ router.get('/:userName', UserController.findByUsername_user);
 router.get('/:userId', UserController.findById_user);
 
 //LoginUser     (#LOGIN)
-router.post('/signin', UserController.signin_user);
+router.post('/login', UserController.signin_user);
 
 //CreateUser    (SIGNUP #REGISTER)
-router.post('/signup', UserController.signup_user);
+router.post('/register', UserController.signup_user);
 
 module.exports = router;
