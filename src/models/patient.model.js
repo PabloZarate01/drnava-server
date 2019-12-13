@@ -16,21 +16,21 @@ const PatientSchema = new Schema({
         default : Date.now
     },
     address : {
-        adrStreet : {
+        street : {
             type : String,
         },
-        adrSuburb : {
+        suburb : {
             type : String,
         },
-        adrCity : {
+        city : {
             type : String,
         },
     },
     phoneNumbers : {
-        phoneHome : {
+        home : {
             type : String,
         },
-        phoneOffice : {
+        office : {
             type : String,
         },
         phone : {
