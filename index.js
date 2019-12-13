@@ -18,7 +18,7 @@ app.get('/', (req, res) =>{
     res.send('Server ON!');
 });
 //Routes
-app.use('/', indexRoutes)
+app.use('/', indexRoutes);
 app.use('/api/user', userRoutes);
 
 
