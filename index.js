@@ -5,6 +5,7 @@ const express = require('express');
 const app = express();
 //Import routes
 const userRoutes = require('./src/routes/user.routes');
+const patientRoutes = require('./src/routes/patient.routes')
 const indexRoutes = require('./src/routes/index.routes');
 
 //Middleware
@@ -22,5 +23,5 @@ app.get('/', (req, res) =>{
 //Routes
 app.use('/', indexRoutes);
 app.use('/api/user', userRoutes);
-
-
+app.use('/api/patient', patientRoutes);
+//app.use('/api/appointment', appointmentRoutes);
