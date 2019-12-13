@@ -1,13 +1,15 @@
 const morgan = require('morgan');
-const { mongoose } = require('./database')
+const { mongoose } = require('./database');
+const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 //Import routes
-const userRoutes = require('./src/routes/user.routes')
-const indexRoutes = require('./src/routes/index.routes')
+const userRoutes = require('./src/routes/user.routes');
+const indexRoutes = require('./src/routes/index.routes');
 
 //Middleware
 app.use(morgan('dev'));
+app.use(bodyParser.json());
 //Settings
 app.set('port', process.env.PORT || 8080)
 //Server

@@ -91,6 +91,7 @@ exports.signin_user = async (req, res, next) =>{
 }
 //SINGUP
 exports.signup_user = async (req, res, next) =>{
+    console.log("Body>>", req.body)
     const { userName, email, password} = req.body;
     User.find({ userName: userName})
     .exec()
