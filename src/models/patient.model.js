@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 const PatientSchema = new Schema({
-    patientName : {
+    name : {
         type : String,
         uppercase: true,
         require : true
     },
-    patientType : {
+    type : {
         type : String,
         uppercase: true,
         require : true

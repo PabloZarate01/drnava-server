@@ -3,12 +3,14 @@ const { mongoose } = require('./database');
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+const cors = require('cors')
 //Import routes
 const userRoutes = require('./src/routes/user.routes');
 const patientRoutes = require('./src/routes/patient.routes')
 const indexRoutes = require('./src/routes/index.routes');
 
 //Middleware
+app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 //Settings
