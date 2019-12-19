@@ -6,6 +6,11 @@ const PatientSchema = new Schema({
         uppercase: true,
         require : true
     },
+    lastName : {
+        type : String,
+        uppercase: true,
+        require : true
+    },
     type : {
         type : String,
         uppercase: true,
