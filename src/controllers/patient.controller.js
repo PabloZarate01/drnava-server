@@ -26,13 +26,14 @@ exports.findSinglePatient = async (req, res, next) => {
 //POST - Create new patient
 exports.createPatient = async (req, res, next) =>{
     //Get Form Data
-    const {name, type, 
+    const {name, lastName, type, 
         entryDate,address, 
         phoneNumbers, email, notes} = req.body;
     console.log(req.body);
     //Generate record
     patient = new Patient({
         name,
+        lastName,
         type,
         entryDate,
         address,
