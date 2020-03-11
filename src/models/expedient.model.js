@@ -1,15 +1,20 @@
 const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
-const AppointmentSchema = new Schema({
+const ExpedientSchema = new Schema({
     patient_id : {
         type : Schema.Types.ObjectId, ref: 'User',
+    },
+    name : {
+        type : String,
+        uppercase: true,
         require : true
     },
     notes : {
         type : String
     },
-    tooths : {
-        type : String
+    customDate : {
+        type : Date,
+        default : Date.now
     },
     CreatedDate : {
         type : Date,
@@ -20,4 +25,4 @@ const AppointmentSchema = new Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model('Appointment', AppointmentSchema);
+module.exports = mongoose.model('Expedient', ExpedientSchema);
