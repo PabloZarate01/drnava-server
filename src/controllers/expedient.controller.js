@@ -16,11 +16,11 @@ exports.getPatientRecentReconrds = async (req, res, next) => {
     const {patient_id} = req.params
     await Expedient.find({patient_id}).limit(3).sort({customDate: 'descending'})
     .then( expedients => {
-        if(expedients < [0]){
-            res.status(200).json({message : "No hay trabajos registrados"});
-        }else{
+        if(expedients >= [0]){
             console.log(expedients);
             res.status(200).json(expedients);
+        }else{
+            res.status(204).json({message : "No hay trabajos registrados"});
         }
     })
     .catch(err => {
