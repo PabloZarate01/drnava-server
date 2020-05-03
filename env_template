@@ -1,0 +1,4 @@
+NODE_ENV=production,development,test
+DB_URI="mongodb://localhost:27017/name-db"
+PORT=####
+JWT_KEY=GOES_HERE

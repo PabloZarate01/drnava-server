@@ -1,4 +1,9 @@
-const morgan = require('morgan');
+const morgan = require('morgan'); 
+require('dotenv').config({
+    path:`.env.${process.env.NODE_ENV || "dev"}`
+});
+//const result = dotenv.config();
+console.log("Env Variables",process.env.NODE_ENV)
 const { mongoose } = require('./database');
 const bodyParser = require('body-parser');
 const express = require('express');
