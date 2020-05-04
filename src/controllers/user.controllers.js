@@ -35,14 +35,14 @@ exports.findById_user = async (req, res, next) =>{
 //SIGNIN
 exports.signin_user = async (req, res, next) =>{
     console.log(req.body);
-    const { email, password } = req.body;
-    User.findOne({email : email})
+    const { userName, password } = req.body;
+    User.findOne({userName})
      .then(user =>{
          console.log("found",user)
         if(!user){
                 console.log('UserNotFound');
                 res.status(203).json({
-                    message : "Wrong email or password"
+                    message : "Wrong username or password"
                 });
         }
         console.log('Password compare')
@@ -70,6 +70,7 @@ exports.signin_user = async (req, res, next) =>{
                         message : "Login successful",
                         token,
                         user : {
+                            userId:user._id,
                             userName : user.userName,
                             email : user.email
                         }
