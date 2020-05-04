@@ -5,7 +5,7 @@ mongoose.connect(process.env.DB_URI, {useNewUrlParser: true, useUnifiedTopology:
     if(err){
         console.error(`DB ERROR:${err}`.red)
     }else if(!err){
-        console.log("DB CONNECTED!".green)
+        console.log("DB CONNECTED!".green.bgBlack)
     }
 });
 

@@ -36,17 +36,20 @@ exports.findById_user = async (req, res, next) =>{
 exports.signin_user = async (req, res, next) =>{
     console.log(req.body);
     const { userName, password } = req.body;
+    if(!userName || !password){
+        res.status(204).json({message:"Rellena los campos"});
+    }else
     User.findOne({userName})
      .then(user =>{
          console.log("found",user)
         if(!user){
                 console.log('UserNotFound');
                 res.status(203).json({
-                    message : "Wrong username or password"
+                    message : "Usuario o contraseña incorreactos"
                 });
-        }
-        console.log('Password compare')
+        }else
         bcrypt.compare(password, user.password, (err, response) => {
+            console.log('Password compare...'.black.bgCyan)
             if(response){
                 const token = jwt.sign(
                     {
@@ -58,7 +61,7 @@ exports.signin_user = async (req, res, next) =>{
                         expiresIn: "1h"
                     }
                     );
-                console.log("Login OK!")
+                console.log("Login Success".green.bgBlack)
                 const newUserToken = new UserToken({
                     userId : user._id,
                     userToken : token
@@ -67,7 +70,7 @@ exports.signin_user = async (req, res, next) =>{
                  .then(result => {
                     console.log("SavedJWT",result);
                     res.status(200).json({
-                        message : "Login successful",
+                        message : "Login Success!!!",
                         token,
                         user : {
                             userId:user._id,
@@ -77,13 +80,14 @@ exports.signin_user = async (req, res, next) =>{
                     });
                  })
             }else if(!response){
-                console.log('Password doesnt match');
+                console.log('Password doesnt match'.bgRed);
                 res.status(203).json({
-                    message : "Wrong email or password"
+                    message : "Usuario o contraseña incorreactos"
                 });
-            }else { 
+            }else if(err){ 
+                console.log("password compare error".bgRed)
                 res.status(500).json({
-                    err
+                    errorPwC:err
                 })
                 console.log("Error to compare password")
             }

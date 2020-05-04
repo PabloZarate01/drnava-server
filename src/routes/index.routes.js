@@ -7,6 +7,6 @@ router.get('/', (req, res) => {
         message : "DR NAVA REST API (Online) LEAVE IF YOU ARE NOT A DEVELOPER"
     })
 });
-//router.get('/auth', verifyAuth, UserController.findMe);
+router.get('/auth', verifyAuth, UserController.findMe);
 
 module.exports = router;

@@ -12,7 +12,7 @@ router.get('/', UserController.findAllUsers);
 router.get('/:userName', UserController.findByUsername_user);
 
 //GetUserByID
-router.get('/:userId', UserController.findById_user);
+router.get('/:userId',verifyAuth, UserController.findById_user);
 
 //LoginUser     (#LOGIN)
 router.post('/login', UserController.signin_user);
