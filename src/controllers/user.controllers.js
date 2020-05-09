@@ -37,7 +37,7 @@ exports.signin_user = async (req, res, next) =>{
     console.log(req.body);
     const { userName, password } = req.body;
     if(!userName || !password){
-        res.status(204).json({message:"Rellena los campos"});
+        res.status(203).json({message:"Rellena los campos"});
     }else
     User.findOne({userName})
      .then(user =>{
@@ -84,7 +84,7 @@ exports.signin_user = async (req, res, next) =>{
             }else if(!response){
                 console.log('Password doesnt match'.bgRed);
                 res.status(203).json({
-                    message : "Usuario o contraseña incorreactos"
+                    message : "Usuario o contraseña incorrectos"
                 });
             }else if(err){ 
                 console.log("password compare error".bgRed)
