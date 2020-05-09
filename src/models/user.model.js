@@ -1,6 +1,16 @@
 const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 const UserSchema = new Schema({
+    name : {
+        type : String,
+        lowercase: true,
+        require : true
+    },
+    lastName : {
+        type : String,
+        lowercase: true,
+        require : true
+    },
     userName : {
         type : String,
         lowercase: true,

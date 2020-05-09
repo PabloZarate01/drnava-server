@@ -6,10 +6,10 @@ const verifyAuth = require('../middlewares/verifyAuth');
 const UserController = require('../controllers/user.controllers');
 
 //GetUsers
-router.get('/', UserController.findAllUsers);
+router.get('/',verifyAuth, UserController.findAllUsers);
 
 //GetUserByUSERNAME
-router.get('/:userName', UserController.findByUsername_user);
+router.get('/:userName',verifyAuth, UserController.findByUsername_user);
 
 //GetUserByID
 router.get('/:userId',verifyAuth, UserController.findById_user);
@@ -20,4 +20,5 @@ router.post('/login', UserController.signin_user);
 //CreateUser    (SIGNUP #REGISTER)
 router.post('/register', UserController.signup_user);
 
+router.post('/edit/:userId', UserController.editUser);
 module.exports = router;

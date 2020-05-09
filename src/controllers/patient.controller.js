@@ -60,7 +60,6 @@ exports.editPatient = async (req, res, next) => {
         res.status(500).json({err})
     })
 }
-
 //Remove Patient
 exports.removePatient = (req, res) =>{
     const { patientId } = req.params;

@@ -74,6 +74,8 @@ exports.signin_user = async (req, res, next) =>{
                         token,
                         user : {
                             userId:user._id,
+                            name:user.name,
+                            lastName:user.lastName,
                             userName : user.userName,
                             email : user.email
                         }
@@ -94,10 +96,21 @@ exports.signin_user = async (req, res, next) =>{
         });
     });
 }
+//EDIT
+exports.editUser = async (req, res, next) => {
+    const { userId } = req.params;
+    await User.findByIdAndUpdate(userId, req.body, {new : true})
+    .then( updatedUser => {
+        res.status(200).json({message : "Editado exitosamente",updatedUser})
+    })
+    .catch( err => {
+        res.status(500).json({err})
+    })
+}
 //SINGUP
 exports.signup_user = async (req, res, next) =>{
     console.log("Body>>", req.body)
-    const { userName, email, password} = req.body;
+    const { name, lastName, userName, email, password} = req.body;
     User.find({ userName: userName})
     .exec()
     .then(userN => {
@@ -122,6 +135,8 @@ exports.signup_user = async (req, res, next) =>{
                     });
                     }else {
                         const user = new User({
+                            name,
+                            lastName,
                             userName,  
                             email,
                             password: hash
