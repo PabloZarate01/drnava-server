@@ -12,11 +12,11 @@ const ExpedientSchema = new Schema({
     notes : {
         type : String
     },
-    customDate : {
+    enrtyDate : {
         type : Date,
         default : Date.now
     },
-    CreatedDate : {
+    computedDate : {
         type : Date,
         default : Date.now
     }

@@ -16,10 +16,6 @@ const PatientSchema = new Schema({
         uppercase: true,
         require : true
     },
-    entryDate : {
-        type : Date,
-        default : Date.now
-    },
     address : {
         street : {
             type : String,
@@ -49,7 +45,11 @@ const PatientSchema = new Schema({
     notes : {
         type : String
     },
-    CreatedDate : {
+    entryDate : {
+        type : Date,
+        default : Date.now
+    },
+    computedDate : {
         type : Date,
         default : Date.now
     }

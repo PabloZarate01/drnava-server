@@ -1,12 +1,9 @@
 const Patient = require('../models/patient.model');
 //GET ALL
 exports.findAllPatients = async (req, res, next) => {
-    await Patient.find()
+    await Patient.find().sort({entryDate: 'descending'})
     .then( patients => {
-        if(patients < [0]){
-            res.status(200).json({message : "No hay pacientes registrados"});
-        }else
-            res.status(200).json(patients);
+        res.status(200).json(patients);
     })
     .catch(err => {
         res.status(400).json(err);
@@ -15,7 +12,7 @@ exports.findAllPatients = async (req, res, next) => {
 //GET BY ID
 exports.findSinglePatient = async (req, res, next) => {
     const { patientId } = req.params;
-    await Patient.findById(patientId)
+    await Patient.findOne({_id:patientId})
     .then( patient => {
         res.status(200).json(patient)
     })
@@ -26,11 +23,14 @@ exports.findSinglePatient = async (req, res, next) => {
 //POST - Create new patient
 exports.createPatient = async (req, res, next) =>{
     //Get Form Data
-    const {name, lastName, type, 
-        entryDate,address, 
+    const {name, lastName, type, address, 
         phoneNumbers, email, notes} = req.body;
+        let {entryDate} = req.body;
     console.log(req.body);
     //Generate record
+    if(!entryDate){
+        entryDate = Date.now();
+    }
     patient = new Patient({
         name,
         lastName,

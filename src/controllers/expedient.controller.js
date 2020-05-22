@@ -14,7 +14,7 @@ exports.getAllRecords = async (req, res, next) =>{
 //GetRecent
 exports.getPatientRecentReconrds = async (req, res, next) => {
     const {patient_id} = req.params
-    await Expedient.find({patient_id}).limit(3).sort({customDate: 'descending'})
+    await Expedient.find({patient_id}).limit(3).sort({entryDate: 'descending'})
     .then( expedients => {
         if(expedients >= [0]){
             console.log(expedients);
@@ -30,9 +30,9 @@ exports.getPatientRecentReconrds = async (req, res, next) => {
 //GetRecordsBy UserID
 exports.findPatientRecords = async (req, res, next) => {
     const {patient_id} = req.params
-    await Expedient.find({patient_id})
-    .then( patient => {
-        res.status(200).json(patient)
+    await Expedient.find({patient_id}).sort({entryDate: 'descending'})
+    .then( patRecords => {
+        res.status(200).json(patRecords)
     })
     .catch(err => {
         res.status(500).json(err)
@@ -40,15 +40,18 @@ exports.findPatientRecords = async (req, res, next) => {
 }
 exports.createRecord = async (req, res, next) =>{
     //Get Form Data
-    const {name,customDate,notes} = req.body;
+    const {name,entryDate,notes} = req.body;
     const {patient_id} = req.params
     console.log(req.params);
     console.log(req.body);
     //Generate record
+    if(!entryDate){
+        entryDate = Date.now();
+    }
     expedient = new Expedient({
         patient_id,
         name,
-        customDate,
+        entryDate,
         notes
     });
     //Push to db
@@ -56,6 +59,26 @@ exports.createRecord = async (req, res, next) =>{
         console.log("Expedient Saved Result>",result);
         res.status(200).json({message : "El expediente fue creado exitosamente"});
     }).catch(err => {
+        res.status(500).json({err})
+    })
+}
+//Remove Patient
+exports.removePatRecord = (req, res) =>{
+    const { recordId } = req.params;
+    console.log(recordId)
+    Expedient.findByIdAndDelete(recordId)
+    .then( cb => {
+        console.log("CallBack>>",cb);
+        if(!cb){
+            res.status(200).json({
+                message : "No hay registros por borrar"
+            })
+        }else{
+        res.status(200).json({
+            message : "Paciente eliminado correctamente"
+        })}
+    })
+    .catch(err => {
         res.status(500).json({err})
     })
 }
