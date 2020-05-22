@@ -26,6 +26,7 @@ app.set('port', process.env.PORT || 8080)
 //Server
 app.listen(app.get('port'), () => {
     console.log('SERVER ON PORT', app.get('port'));
+    console.log("Hello")
 });
 //Routes
 app.use('/', indexRoutes);
