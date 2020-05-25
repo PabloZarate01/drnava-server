@@ -12,6 +12,9 @@ const ExpedientSchema = new Schema({
     notes : {
         type : String
     },
+    canvasDrawData : {
+        type : String
+    },
     enrtyDate : {
         type : Date,
         default : Date.now

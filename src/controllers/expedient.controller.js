@@ -40,7 +40,8 @@ exports.findPatientRecords = async (req, res, next) => {
 }
 exports.createRecord = async (req, res, next) =>{
     //Get Form Data
-    const {name,entryDate,notes} = req.body;
+    const {name,notes,canvasDrawData} = req.body;
+    let {entryDate} = req.body;
     const {patient_id} = req.params
     console.log(req.params);
     console.log(req.body);
@@ -52,7 +53,8 @@ exports.createRecord = async (req, res, next) =>{
         patient_id,
         name,
         entryDate,
-        notes
+        notes,
+        canvasDrawData
     });
     //Push to db
     expedient.save().then( result => {
@@ -80,5 +82,27 @@ exports.removePatRecord = (req, res) =>{
     })
     .catch(err => {
         res.status(500).json({err})
+    })
+}
+//Edit Record
+exports.editRecord = async (req, res, next) => {
+    const { recordId } = req.params;
+    await Expedient.findByIdAndUpdate(recordId, req.body, {new : true})
+    .then( updatedRecord => {
+        res.status(200).json({message : "Editado exitosamente",updatedRecord})
+    })
+    .catch( err => {
+        res.status(500).json({err})
+    })
+}
+//GET BY ID
+exports.getRecordById = async (req, res, next) => {
+    const { recordId } = req.params;
+    await Expedient.findOne({_id:recordId})
+    .then( record => {
+        res.status(200).json(record)
+    })
+    .catch(err => {
+        res.status(500).json(err)
     })
 }
