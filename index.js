@@ -15,6 +15,7 @@ const userRoutes = require('./src/routes/user.routes');
 const patientRoutes = require('./src/routes/patient.routes')
 const indexRoutes = require('./src/routes/index.routes');
 const expedientRoutes = require('./src/routes/expedient.routes');
+const verifyAuth = require('./src/middlewares/verifyAuth');
 //Middleware
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -31,6 +32,6 @@ app.listen(app.get('port'), () => {
 //Routes
 app.use('/', indexRoutes);
 app.use('/api/user', userRoutes);
-app.use('/api/patient', patientRoutes);
-app.use('/api/expedient', expedientRoutes);
+app.use('/api/patient',verifyAuth, patientRoutes);
+app.use('/api/expedient',verifyAuth, expedientRoutes);
 //app.use('/api/appointment', appointmentRoutes);

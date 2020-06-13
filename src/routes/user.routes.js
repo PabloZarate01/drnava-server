@@ -18,7 +18,7 @@ router.get('/:userId',verifyAuth, UserController.findById_user);
 router.post('/login', UserController.signin_user);
 
 //CreateUser    (SIGNUP #REGISTER)
-router.post('/register', UserController.signup_user);
+router.post('/register',verifyAuth,UserController.signup_user);
 
-router.post('/edit/:userId', UserController.editUser);
+router.post('/edit/:userId',verifyAuth, UserController.editUser);
 module.exports = router;
